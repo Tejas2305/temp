@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "Abhivyakti",
+  "version": "0.1.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtPgdtRDsfP0iMWZwnfE4BWT2BJj5Y8XzPcVBioOdiYxzM3rxPwrhO7Apu/U6+0eTCaWqWv4WCZtJkfXNjt1/Xj4YcAAtEY86D6fYSTjEKkYb52JVnFUfofnWquDsGOEL5GtBQy64gZX2zPMusuYPwGjVFELqJojOpOSNUC1qhqMTMNc299KPmwL0scPamOUIQiiPl+XxxWaEUV+ensvatLtYB58p4VzuoWL0QhE9zeeAjzBn2jNK2oAtm5ekwLgK84/8ua+5xoaU6dmNCGAkKZT0UX1X6sCD72wbGrSW2LMe4b2k0P9lqoTIwoboYkzM7decKPJw7o9UXnZFIMzVRwIDAQAB",
+  "description": "Abhivyakta reads Indian Sign Language fingerspelling (A-Z, 0-9) from videos on YouTube, Google Meet and other sites and shows editable captions beside the video. Runs fully on your device.",
+  "permissions": [
+    "storage",
+    "identity"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Abhivyakti"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/caption-state.js",
+        "content/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "engine/engine.html",
+        "icons/mark.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-isl": {
+      "suggested_key": {
+        "default": "Alt+Shift+I"
+      },
+      "description": "Turn Abhivyakta on/off"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "https://abhivyakti-backend-486350221693.asia-south1.run.app/*"
+  ]
+}
